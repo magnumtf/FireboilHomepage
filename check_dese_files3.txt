@@ -1,0 +1,54 @@
+bet-exec1.php:	$link = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+bet-exec1.php:		die('Failed to connect to server: ' . mysql_error());
+bet-exec1.php:	$db = mysql_select_db(DB_DATABASE);
+bet-exec1.php:		return mysql_real_escape_string($str);
+bet-exec1.php:	$result=mysql_query($qry);
+bet-exec1.php:		while ($row = mysql_fetch_assoc($result)) 
+bet-exec1.php:		mysql_free_result($result);
+bet-exec1.php:		if(mysql_num_rows($result) == 1) 
+bet-exec1.php:			$member = mysql_fetch_assoc($result);
+get_pick6_sheets.php:	$link = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+get_pick6_sheets.php:		die('Failed to connect to server: ' . mysql_error());
+get_pick6_sheets.php:	$db = mysql_select_db(DB_DATABASE);
+get_pick6_sheets.php:	$result=mysql_query($qry);
+get_pick6_sheets.php:	mysql_close($link);  // put at end of file
+get_user2.php:	$link = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+get_user2.php:		die('Failed to connect to server: ' . mysql_error());
+get_user2.php:	$db = mysql_select_db(DB_DATABASE);
+get_user2.php:	$result=mysql_query($qry);
+get_user2.php:		while ($row = mysql_fetch_assoc($result)) {
+get_user2.php:	mysql_close($link); 	
+get_user3.php:	$link = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+get_user3.php:		die('Failed to connect to server: ' . mysql_error());
+get_user3.php:	$db = mysql_select_db(DB_DATABASE);
+get_user3.php:	$result=mysql_query($qry);
+get_user3.php:		while ($row = mysql_fetch_assoc($result)) {
+get_user3.php:	mysql_close($link); 	
+get_user4.php:	$link = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+get_user4.php:		die('Failed to connect to server: ' . mysql_error());
+get_user4.php:	$db = mysql_select_db(DB_DATABASE);
+get_user4.php:	$result=mysql_query($qry);
+get_user4.php:	mysql_close($link);  // put at end of file
+get_user5.php:	$link = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+get_user5.php:		die('Failed to connect to server: ' . mysql_error());
+get_user5.php:	$db = mysql_select_db(DB_DATABASE);
+get_user5.php:	$result=mysql_query($qry);
+get_user5.php:	mysql_close($link);  // put at end of file
+get_user.php:	$link = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+get_user.php:		die('Failed to connect to server: ' . mysql_error());
+get_user.php:	$db = mysql_select_db(DB_DATABASE);
+get_user.php:	$result=mysql_query($qry);
+get_user.php:		while($row = mysql_fetch_array($result))
+get_user.php:	mysql_close($link);
+login-exec2_mtf_test.php://	$db = mysql_select_db(DB_DATABASE);
+register-exec.php:	$link = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+register-exec.php:		die('Failed to connect to server: ' . mysql_error());
+register-exec.php:	$db = mysql_select_db(DB_DATABASE);
+register-exec.php:		return mysql_real_escape_string($str);
+register-exec.php:	$result=mysql_query($qry2);
+register-exec.php:		$customer_id = mysql_insert_id();
+register-exec.php:	    $result4=mysql_query($qry4);
+register-exec.php:	 	  $result5=mysql_query($qry5);
+register-exec.php:		  	$account_id = mysql_insert_id();
+register-exec.php:	    	$result6=mysql_query($qry6);
+register-exec.php:			$result=mysql_query($qry6);		

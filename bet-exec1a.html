@@ -1,0 +1,141 @@
+// yo mtf, this is javascript - need to write a form verifcation,
+// this script to be added to the js file
+// and this needs to be added to the form:
+//<form name="myForm" action="demo_form.asp" onsubmit="return validateForm()" method="post">
+
+<?php
+	//Start session
+	session_start();
+	
+	//Include database connection details
+	require_once('config.php');
+	include ('class.Form_pool.php');
+	
+	//Array to store validation errors
+	$errmsg_arr = array();
+	
+	//Validation error flag
+	$errflag = false;
+		
+	//Connect to mysql server
+	$link = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+	if(!$link) {
+		die('Failed to connect to server: ' . mysql_error());
+	}
+	//Select database
+	$db = mysql_select_db(DB_DATABASE);
+	if(!$db) {
+		die("Unable to select database");
+	}
+
+	if(!isset($_SESSION['SESS_MEMBER_ID']) || (trim($_SESSION['SESS_MEMBER_ID']) == '')) {
+		header("location: index1.php");
+		exit();
+	}
+
+	echo "<div id='pool_view'>\n";
+	echo "<table id='hor-minimalist-a' summary="bet form">\n";
+	echo "<colgroup>\n";
+	echo "<col />\n";
+	echo "<col />\n";
+	echo "<col />\n";
+	echo "<col />\n";
+	echo "<col class='oce-first' />\n";
+	echo "</colgroup>\n";
+
+	for($i=0;$i<count($_POST["game_num_arr"]);$i++)  
+	{
+		$gam_nam = trim($_POST["game_name_arr"][$i]);
+		$gamedate = trim($_POST["gamedate_arr"][$i]);  // yo mtf, value is one date should be per game
+		$entry1_nam = trim($_POST["entry1_name_arr"][$i]);
+		$entry2_nam = trim($_POST["entry2_name_arr"][$i]);
+		$entry3_nam = 'Push';
+		$game_info = "$gam_nam" . ", " . "$entry1_nam" . "vs." . "$entry2_nam";
+		echo "<thead>\n";
+		echo "<tr>\n";
+		echo "<th colspan='5'><span>" . "$game_info" . "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp" . "$gamedate" . "</span></th>\n";
+		echo "</tr>\n";
+		echo "<tr>\n";
+		echo "<th colspan='5' height='0'></th>\n";
+		echo "</tr>\n";
+		echo "</thead>\n";
+		$pool_acct_id_sp =  trim($_POST["acct_id_sp"][$i]);
+		$pool_acct_id_pwp =  trim($_POST["acct_id_pwp"][$i]);
+		$pool_acct_id_ml =  trim($_POST["acct_id_ml"][$i]);
+		$pool_acct_id_ou =  trim($_POST["acct_id_ou"][$i]);
+		$sp_pool = Form_pool($pool_acct_id_sp, $gam_num, 'sp');
+		$pwp_pool = Form_pool($pool_acct_id_pwp, $gam_num, 'pwp', 3);
+		$ml_pool = Form_pool($pool_acct_id_ml, $gam_num, 'ml');
+		$ou_pool = Form_pool($pool_acct_id_ou, $gam_num, 'ou');
+		echo "<tbody>\n";
+		for ($j=0; $j<count($sp_pool->$num_bets); $j++)
+		{
+			echo "<tr>\n";
+			echo "<td>" . "$sp_pool->$strPoolType" . "</td>\n";
+			echo "<td>" . "$sp_pool->$arrSpread[$j]" . "</td>\n";
+			echo "<td>" . "$sp_pool->$arrCurrentOdds[$j]" . "</td>\n";
+			echo "<td>" . "$sp_pool->$pick_rot_id_name_arr[$j]" . "</td>\n";
+			echo "<td><input type='text' name='amount_sp[]' value=" . "$sp_pool->$amount_arr[$j]" . " readonly> to win " . "$sp_pool->$amount2[$j]" . "*</td>\n";
+			echo "</tr>\n";
+
+		}
+/*
+		for ($j=0; $j<count($pwp_pool->$num_bets); $j++)
+		{
+			echo "<tr>\n";
+			echo "<td>" . "$pwp_pool->$pool_type" . "</td>\n";
+			echo "<td>" . "$pwp_pool->$spread_arr[$j]" . "</td>\n";
+			echo "<td>" . "$pwp_pool->$current_odds[$j]" . "</td>\n";
+			echo "<td>" . "$pwp_pool->$pick_rot_id_name[$j]" . "</td>\n";
+			echo "<td><input type='text' name='amount_pwp[]' value=" . "$pwp_pool->$amount_arr[$j]" . " readonly> to win " . "$pwp_pool->$amount2[$j]" . "*</td>\n";
+			echo "</tr>\n";
+
+		}
+
+		for ($j=0; $j<count($ml_pool->$num_bets); $j++)
+		{
+			echo "<tr>\n";
+			echo "<td>" . "$ml_pool->$pool_type" . "</td>\n";
+			echo "<td>" . "$ml_pool->$spread_arr[$j]" . "</td>\n";
+			echo "<td>" . "$ml_pool->$current_odds[$j]" . "</td>\n";
+			echo "<td>" . "$ml_pool->$pick_rot_id_name[$j]" . "</td>\n";
+			echo "<td><input type='text' name='amount_ml[]' value=" . "$ml_pool->$amount_arr[$j]" . " readonly> to win " . "$ml_pool->$amount2[$j]" . "*</td>\n";
+			echo "</tr>\n";
+		}
+
+		for ($j=0; $j<count($ou_pool->$num_bets); $j++)
+		{
+			echo "<tr>\n";
+			echo "<td>" . "$ou_pool->$pool_type" . "</td>\n";
+			echo "<td>" . "$ou_pool->$spread_arr[$j]" . "</td>\n";
+			echo "<td>" . "$ou_pool->$current_odds[$j]" . "</td>\n";
+			echo "<td>" . "$ou_pool->$pick_rot_id_name[$j]" . "</td>\n";
+			echo "<td><input type='text' name='amount_ou[]' value=" . "$ou_pool->$amount_arr[$j]" . " readonly> to win " . "$ou_pool->$amount2[$j]" . "*</td>\n";
+			echo "</tr>\n";
+		}
+*/		
+	}
+
+yo mtf, 
+make hiddens
+create enders.
+for test just output for now, so just do enders.
+
+	then put enders here.
+
+for gam in game_arr:
+from register:
+	//Sanitize the POST values, login, password, page_id
+	$game_desc_id = clean($_POST['game_desc_id']);
+	$customer_id = $_SESSION['SESS_MEMBER_ID'];
+	$customer_account_id = $$_SESSION['SESS_ACCOUNT_ID'];
+	$entry1_rot = clean($_POST['rot_id_e1_game1']);
+	$entry2_rot = clean($_POST['rot_id_e2_game1']);
+
+
+
+<?php if($_POST['YourChoice']=="fish") echo "checked=checked"; ?> > Fish
+      <input name="YourChoice" type="checkbox" value="meat" <?php if($_POST['YourChoice']=="meat") echo "checked=checked"; ?> > Meat
+      <input name="YourChoice" type="checkbox" value="vegetable" <?php if($_POST['YourChoice']=="vegetable") echo "checked=checked"; ?> > Vegetable
+      <br/><br/>
+

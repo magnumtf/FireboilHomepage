@@ -1,0 +1,423 @@
+/* Global Styles */
+
+body {
+/*	margin:0px;  */
+	margin: 0 10%;
+	background-color:#999966;
+	}
+	
+td {
+	font:11px arial;
+	color:#333333;
+	}
+	
+a {
+	color: #cc0000;
+	text-decoration:none;
+	font-weight:bold;
+	}
+	
+a:hover {
+	color: #990000;
+	text-decoration:underline;
+	}
+	
+/* ID Styles */
+	
+#navigation a {
+	font:10px arial;
+	color: #336666;
+	text-decoration:none;
+	letter-spacing:.1em;
+	}
+	
+#navigation a:hover {
+	color: #993300;
+	text-decoration:underline;
+	}
+
+#padding {
+	padding:20px 5px 20px 5px;
+	}
+	
+#weekdays th {
+	font:10px arial;
+	color: #ffffff;
+	letter-spacing:.2em;
+	}
+
+#calheader td {
+	font-weight:bold;
+	}
+	
+th#teamName {
+	text-align: left; width: 150px; height: 20px; background: #ff4500;
+	border: 1px solid white;
+	}
+	
+th#gameName {
+	text-align: left; width: 150px; height: 20px; background: #CCFFFF;
+	border: 1px solid white;
+	}	
+	
+th#rot {
+	text-align: left; width: 30px; height: 20px; background: #ff4500;
+	border: 1px solid white;	
+	}
+	
+th#pointSpread {
+	width: 100px; height: 20px; background: #ff4500;
+	border: 1px solid white;
+	}
+	
+th#ouHeaderLeft {
+	width: 36px; height: 20px; background: #ff4500;
+	border-top: 1px solid white;
+	border-bottom: 1px solid white;
+	border-left: 1px solid white;
+	}
+
+th#ouHeaderRight {
+	width: 64px; height: 20px; background: #ff4500;
+	text-align: left;
+	border-top: 1px solid white;
+	border-right: 1px solid white;
+	border-bottom: 1px solid white;	}
+
+th#badTeamName {
+	text-align: left; width: 150px; height: 20px; background: #556b2f;
+	border: 1px solid white;
+	}
+		
+th#badRot {
+	text-align: left; width: 30px; height: 20px; background: #556b2f;
+	border: 1px solid white;	
+	}
+	
+th#badPointSpread {
+	width: 100px; height: 20px; background: #556b2f;
+	border: 1px solid white;
+	}
+	
+th#badOuHeaderLeft {
+	width: 36px; height: 20px; background: #556b2f;
+	border-top: 1px solid white;
+	border-bottom: 1px solid white;
+	border-left: 1px solid white;
+	}
+
+th#badOuHeaderRight {
+	width: 64px; height: 20px; background: #556b2f;
+	text-align: left;
+	border-top: 1px solid white;
+	border-right: 1px solid white;
+	border-bottom: 1px solid white;	}
+
+
+th#teamTotal {
+	width: 130px; height: 20px; background: #ff4500;
+	}	
+
+th#overlay {
+	text-align: left; height: 20px; background: gold;
+	border: 1px solid white;
+	}
+	
+td#bfDefault {
+	border: 1px solid white;
+}
+
+td#odds {
+/*	text-align: right; */
+	vertical-align: top;
+	text-align: right;
+/*	float: right; */
+	background: silver;
+	border: 1px solid white;
+}
+	
+td#olPercent {
+/*	text-align: right; */
+	vertical-align: top;
+	text-align: right;
+/*	float: right; */
+	background: gold;
+	border: 1px solid white;
+}
+
+td#overUnder {
+/*	text-align: right; */
+	vertical-align: middle;
+	text-align: right;
+/*	float: right; */
+	background: silver;
+	border-top: 1px solid white;
+	border-right: 1px solid white;
+	border-bottom: 1px solid white;
+	}
+
+td#overUnderNumber {
+/*	text-align: right; */
+	font-family: Lucida Console;
+	vertical-align: middle;
+	text-align: right;
+/*	float: right; */
+	background: silver;
+	border-top: 1px solid white;
+	border-bottom: 1px solid white;
+	border-left: 1px solid white;
+	}
+	
+label#overUnderLabel {
+/*	text-align: right; background: gray; vertical-align: middle; */
+	font-family: Lucida Console;
+	vertical-align: bottom;
+    position: relative;
+    top: -3px;
+	right: -2px;
+	}
+	
+span#overUnderSpan {
+/*	text-align: right; background: gray; vertical-align: middle;
+	vertical-align: middle;
+    position: relative;
+    top: -3px;
+	right: -2px; */
+position: float;
+text-align: left;
+	}
+
+span#underWear {
+/*	font: Arial, Helvetica, sans-serif; */
+font-size: xx-small;
+font-weight: bold;
+font-style: normal;
+font-family: Georgia, "Times New Roman", Times, serif;
+
+	}
+	
+em#emRight {
+	text-align: right;
+	background-color: #CCFFFF;
+	}
+	
+em#emLeft {
+	text-align: left;
+	}
+	
+option#bfdOptions {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9px;
+}
+
+caption {
+text-align: left; font-size: larger;
+}
+/* Class Styles */
+
+.logo {
+	font:18px times new roman;
+	color: #333300;
+	letter-spacing:.4em;
+	font-weight:bold;
+	}
+
+.sidebarText {
+	font:12px georgia;
+	color: #336666;
+	line-height:18px;
+	}
+	
+.bodyText {
+	font:11px arial;
+	line-height:24px;
+	color:#333333;
+	}
+	
+.pageName {
+	font:20px georgia;
+	color: #CC3300;
+	letter-spacing:.1em;
+	line-height:26px;
+	}
+	
+.subHeader {
+	font:14px georgia;
+	color: #669999;
+	font-weight:bold;
+	line-height:20px;
+	letter-spacing:.1em;
+	}
+	
+.navText {
+	font:10px arial;
+	color: #333300;
+	letter-spacing:.1em;
+	}
+	
+.calendarText {
+	font:11px arial;
+	line-height:14px;
+	color:#333333;
+	}
+	
+/* mtf class styles */
+div.row {
+  clear: both;
+  padding-top: 5px;
+  }
+
+div.row span.label {
+  float: left;
+  width: 100px;
+  text-align: right;
+  }
+
+div.row span.formw {
+  float: right;
+  width: 235px;
+  text-align: left;
+  vertical-align: text-top;
+  } 	
+	
+label#blackLabel {
+	clear: both;
+    display: block;
+    padding-left: 15px;
+    text-indent: -15px;
+}
+
+label#blackLabel2 {
+	font-family: Lucida Console;
+	vertical-align: bottom;
+    position: relative;
+    top: -3px;
+	right: -2px;
+}
+
+input#blackInput {
+    width: 13px;
+    height: 13px;
+    padding: 0;
+    margin:0;
+    vertical-align: bottom;
+    position: relative;
+    top: 3px;
+	right: 3px;
+    *overflow: hidden;
+}
+
+.checkboxes label
+{
+    display: block;
+    float: left;
+    padding-right: 10px;
+    white-space: nowrap;
+}
+
+.checkboxes input
+{
+    vertical-align: middle;
+}
+
+.checkboxes label span
+{
+    vertical-align: middle;
+}
+
+.form-field * {
+    vertical-align: bottom;
+}
+
+.tabley {
+	vertical-align: top;
+	border-collapse: collapse;
+	font-size: 9px;
+}
+
+h1.vag {color:#00ff00;}
+h2.vag {color:rgb(255,0,0);}
+
+span.bfd
+{
+	font-size: xx-small;
+	font-weight: bold;
+	font-style: normal;
+	font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+label.bfd {
+	font-family: Lucida Console;
+	vertical-align: bottom;
+    position: relative;
+    top: -3px;
+	right: -2px;
+}
+
+td.bfd {
+	vertical-align: top;
+	text-align: right;
+	background: silver;
+	border: 1px solid white;
+}
+
+/* form css from the internets */
+label.formC
+{
+width: 4em;
+float: left;
+text-align: right;
+margin-right: 0.5em;
+display: block;
+}
+
+submit#subIn
+{
+margin-left: 4.5em;
+}
+
+input.formC
+{
+color: #781351;
+background: #fee3ad;
+border: 1px solid #781351;
+font-size: xx-small;
+}
+
+.submit input
+{
+color: #000;
+background: #ffa20f;
+border: 2px outset #d7b9c9;
+margin-left: 3.7em;
+text-decoration: blink;
+}
+
+fieldset.formC
+{
+border: 1px solid #781351;
+width: 20em
+}
+
+legend.formC
+{
+color: #fff;
+background: #ffa20c;
+border: 1px solid #781351;
+padding: 2px 6px
+}
+
+#myselect {
+width: 140px;
+height: 15px;
+font-family: Verdana, Arial, Helvetica, sans-serif;
+font-size: 9px;
+}
+
+/*
+#myselect option {
+width:220px;
+height: 4px;
+font-size: 9px;
+}
+*/

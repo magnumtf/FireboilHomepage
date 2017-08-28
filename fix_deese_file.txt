@@ -1,0 +1,10 @@
+bet-exec1.php:	$link = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+gameSetup-exec.php:	$link = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+get_pick6_sheets.php:	$link = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+get_user2.php:	$link = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+get_user3.php:	$link = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+get_user4.php:	$link = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+get_user5.php:	$link = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+get_user.php:	$link = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+login-exec2.php:	$link = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+register-exec.php:	$link = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);

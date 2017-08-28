@@ -1,0 +1,306 @@
+New One to work on - Update Into Bet (trans_id2,2,pick_entry1)
+	for pick6, same as above except - 1. No Commit  2. set bet status to 1 (pending), don't set trans status to 2.
+DELIMITER //
+CREATE PROCEDURE handle_transaction9(IN from_acct INT UNSIGNED, IN to_acct INT UNSIGNED, IN amt FLOAT, IN btype TINYINT UNSIGNED, IN pick_entry1 INT UNSIGNED, OUT trans_id2 INT UNSIGNED)
+BEGIN
+	DECLARE f_acct_val_orig FLOAT DEFAULT -1.0;
+	DECLARE t_acct_val_orig FLOAT DEFAULT -1.0;
+	DECLARE new_val_f FLOAT DEFAULT -1.0;
+	DECLARE new_val_t FLOAT DEFAULT -1.0;
+	DECLARE datime DATETIME;
+	START TRANSACTION;
+	SELECT NOW() INTO datime;
+	SELECT balance INTO f_acct_val_orig FROM account WHERE account_id=from_acct;
+	SELECT balance INTO t_acct_val_orig FROM account WHERE account_id=to_acct;
+	SET trans_id2 = 0;
+	IF f_acct_val_orig >= amt THEN
+		INSERT INTO transaction (from_acct_id,to_acct_id,amount,type,status,initial_time) VALUES (from_acct,to_acct,amt,btype,1,datime);
+		SET trans_id2 = last_insert_id();
+	END IF;
+	
+	IF trans_id2 > 0 THEN
+		SET new_val_f = f_acct_val_orig - amt;
+		SET new_val_t = t_acct_val_orig + amt;
+		UPDATE account SET balance=new_val_f WHERE account_id=from_acct;
+		UPDATE account SET balance=new_val_t WHERE account_id=to_acct;
+		INSERT INTO bet (trans_id,status,pick_entry1) VALUES (trans_id2,2,pick_entry1);
+		UPDATE transaction SET status=2,complete_time=datime WHERE trans_id=trans_id2;
+		IF new_val_f <= 0.0 THEN
+		    UPDATE account SET status=3 WHERE account_id=from_acct;
+		END IF;		
+	END IF;
+	COMMIT;
+END//
+DELIMITER ;
+
+	for pick6, same as above except - 1. No Commit  2. set bet status to 1 (pending), don't set trans status to 2.
+DELIMITER //
+CREATE PROCEDURE handle_transaction9_p6(IN from_acct INT UNSIGNED, IN to_acct INT UNSIGNED, IN amt FLOAT, IN btype TINYINT UNSIGNED, IN pick_entry1 INT UNSIGNED, OUT trans_id2 INT UNSIGNED)
+BEGIN
+	DECLARE f_acct_val_orig FLOAT DEFAULT -1.0;
+	DECLARE t_acct_val_orig FLOAT DEFAULT -1.0;
+	DECLARE new_val_f FLOAT DEFAULT -1.0;
+	DECLARE new_val_t FLOAT DEFAULT -1.0;
+	DECLARE datime DATETIME;
+	START TRANSACTION;
+	SELECT NOW() INTO datime;
+	SELECT balance INTO f_acct_val_orig FROM account WHERE account_id=from_acct;
+	SELECT balance INTO t_acct_val_orig FROM account WHERE account_id=to_acct;
+	SET trans_id2 = 0;
+	IF f_acct_val_orig >= amt THEN
+		INSERT INTO transaction (from_acct_id,to_acct_id,amount,type,status,initial_time) VALUES (from_acct,to_acct,amt,btype,1,datime);
+		SET trans_id2 = last_insert_id();
+	END IF;
+	
+	IF trans_id2 > 0 THEN
+		SET new_val_f = f_acct_val_orig - amt;
+		SET new_val_t = t_acct_val_orig + amt;
+		UPDATE account SET balance=new_val_f WHERE account_id=from_acct;
+		UPDATE account SET balance=new_val_t WHERE account_id=to_acct;
+		INSERT INTO bet (trans_id,status,pick_entry1) VALUES (trans_id2,1,pick_entry1);
+// do this from php.UPDATE transaction SET status=2,complete_time=datime WHERE trans_id=trans_id2;
+		IF new_val_f <= 0.0 THEN
+		    UPDATE account SET status=3 WHERE account_id=from_acct;
+		END IF;		
+	END IF;
+END//
+DELIMITER ;
+
+Use This!!!!!!!
+DELIMITER //
+CREATE PROCEDURE handle_transaction8(IN from_acct INT UNSIGNED, IN to_acct INT UNSIGNED, IN amt FLOAT, IN btype TINYINT UNSIGNED, OUT trans_id2 INT UNSIGNED)
+BEGIN
+	DECLARE f_acct_val_orig FLOAT DEFAULT -1.0;
+	DECLARE t_acct_val_orig FLOAT DEFAULT -1.0;
+	DECLARE new_val_f FLOAT DEFAULT -1.0;
+	DECLARE new_val_t FLOAT DEFAULT -1.0;
+	DECLARE datime DATETIME;
+	START TRANSACTION;
+	SELECT NOW() INTO datime;
+	SELECT balance INTO f_acct_val_orig FROM account WHERE account_id=from_acct;
+	SELECT balance INTO t_acct_val_orig FROM account WHERE account_id=to_acct;
+	SET trans_id2 = 0;
+	IF f_acct_val_orig >= amt THEN
+		INSERT INTO transaction (from_acct_id,to_acct_id,amount,type,status,initial_time) VALUES (from_acct,to_acct,amt,btype,1,datime);
+		SET trans_id2 = last_insert_id();
+	END IF;
+	
+	IF trans_id2 > 0 THEN
+		SET new_val_f = f_acct_val_orig - amt;
+		SET new_val_t = t_acct_val_orig + amt;
+		UPDATE account SET balance=new_val_f WHERE account_id=from_acct;
+		UPDATE account SET balance=new_val_t WHERE account_id=to_acct;
+// MTF, must commit. Should verify?
+// MTF TODO, also put in COMPLETE_TIME HERE ...
+		UPDATE transaction SET status=2,complete_time=datime WHERE trans_id=trans_id2;
+		IF new_val_f <= 0.0 THEN
+		    UPDATE account SET status=3 WHERE account_id=from_acct;
+		END IF;		
+	END IF;
+	COMMIT;
+END//
+DELIMITER ;
+
+Add This!!!!!!!
+DELIMITER //
+CREATE PROCEDURE handle_transaction_dep(IN dep_type TINYINT UNSIGNED, IN to_acct INT UNSIGNED, IN amt FLOAT, OUT trans_id2 INT UNSIGNED)
+BEGIN
+	DECLARE t_acct_val_orig FLOAT DEFAULT -1.0;
+	DECLARE t_p_amt_orig FLOAT DEFAULT -1.0;
+	DECLARE new_val_t FLOAT DEFAULT -1.0;
+	DECLARE datime DATETIME;
+	DECLARE p_init_time DATETIME;
+	DECLARE retdays INT;
+	DECLARE btype TINYINT UNSIGNED;
+	DECLARE from_acct INT UNSIGNED;
+	DECLARE stat TINYINT UNSIGNED;
+	DECLARE p_trans_id INT UNSIGNED DEFAULT 0;
+	START TRANSACTION;
+	SELECT NOW() INTO datime;
+	SELECT NOW() INTO p_init_time;
+
+//trans_id retvals
+//	0 insert failure
+//	1 pending amount failure
+//	2 other failure
+
+
+//1. is account.pending_amount > 0.0:
+//    y:
+//        find all transactions that are PENDING.
+//        for each transaction:
+//            is said transaction > 5 days old:
+//                y:	clear transaction - set account.pending_amount to 0 and set transaction status to CANCELLED (4)
+//       if any pending deposit transaction < 5 days old:
+//           go to end, return 1
+//       else:
+//           continue as usual
+//		n: continue as usual
+	SET btype = 1;
+	SET from_acct = 0;
+	SET trans_id2 = 2;
+	SELECT balance, pending_amount INTO t_acct_val_orig,t_p_amt_orig FROM account WHERE account_id=to_acct;
+	IF t_p_amt_orig > 0.0 THEN
+		SELECT trans_id,initial_time INTO p_trans_id,p_init_time FROM transaction WHERE to_acct_id=to_acct AND status=1 AND type=1;
+
+// yo mtf, this was changed get it in next time u ....
+		SELECT DATEDIFF(datime, p_init_time) INTO retdays;
+		IF retdays > 5 THEN
+			UPDATE account SET pending_amount=0.0 WHERE account_id=to_acct;
+			UPDATE transaction SET status=4 WHERE trans_id=p_trans_id;
+			SET trans_id2 = 0;
+		ELSE
+			SET trans_id2 = 1;
+		END IF;
+	ELSE
+		SET trans_id2 = 0;
+	END IF;
+	
+// right here, override trans_id2 based on dep type (e.g. CASH).
+	IF dep_type = 1 THEN
+		SET trans_id2 = 0;
+	END IF;
+	IF trans_id2 = 0 THEN
+		INSERT INTO transaction (from_acct_id,to_acct_id,amount,type,status,initial_time) VALUES (from_acct,to_acct,amt,btype,1,datime);
+		SET trans_id2 = last_insert_id();	
+		IF trans_id2 > 0 THEN
+			SET new_val_t = t_acct_val_orig + amt;
+    	IF new_val_t > 0.0 THEN
+        	SET stat = 2;
+    	ELSE
+        	SET stat = 3;
+    	END IF;
+			IF dep_type = 1 THEN
+				UPDATE account SET balance=new_val_t,status=stat WHERE account_id=to_acct;
+				UPDATE transaction SET status=2,complete_time=datime WHERE trans_id=trans_id2;
+			ELSE
+				UPDATE account SET pending_amount=amt WHERE account_id=to_acct;
+			END IF;
+		END IF;
+	END IF;
+	COMMIT;
+END//
+DELIMITER ;;
+
+And This!!!!!!!
+DELIMITER //
+CREATE PROCEDURE handle_pending_transaction(IN dep_type TINYINT UNSIGNED, IN to_acct INT UNSIGNED, IN amt FLOAT, OUT trans_id2 INT UNSIGNED)
+BEGIN
+
+steps:
+do later.
+	DECLARE t_acct_val_orig FLOAT DEFAULT -1.0;
+	DECLARE new_val_t FLOAT DEFAULT -1.0;
+	DECLARE datime DATETIME;
+        DECLARE btype TINYINT UNSIGNED;
+	DECLARE from_acct_id INT UNSIGNED;
+	START TRANSACTION;
+	SELECT NOW() INTO datime;
+        SET btype = 1
+	SET from_acct_id = 0;
+	SELECT balance INTO t_acct_val_orig FROM account WHERE account_id=to_acct;
+	SET trans_id2 = 0;
+	INSERT INTO transaction (from_acct_id,to_acct_id,amount,type,status,initial_time) VALUES (from_acct,to_acct,amt,btype,1,datime);
+	SET trans_id2 = last_insert_id();	
+	IF trans_id2 > 0 THEN
+		SET new_val_t = t_acct_val_orig + amt;
+                IF dep_type = 1 THEN
+			UPDATE account SET balance=new_val_t WHERE account_id=to_acct;
+			UPDATE transaction SET status=2,complete_time=datime WHERE trans_id=trans_id2;
+		ELSE
+YO MTF, Need a table change:
+			UPDATE account SET pending_amount=new_val_t WHERE account_id=to_acct;
+		END IF;
+
+// MTF, must commit. Should verify?
+// MTF TODO, also put in COMPLETE_TIME HERE ...
+	END IF;
+	COMMIT;
+END//
+DELIMITER ;
+
+
+to test:
+CALL handle_transaction4(5,6,100,3,@rc);
+
+tranny_test2 or  handle_transaction
+DELIMITER //
+CREATE PROCEDURE tranny_test3(IN amt FLOAT, OUT retval INT)
+BEGIN
+	DECLARE new_val_f FLOAT DEFAULT -1.0;
+	DECLARE new_val_t FLOAT DEFAULT -1.0;
+	START TRANSACTION;
+	SELECT balance INTO new_val_f FROM account WHERE account_id=5;
+	SELECT balance INTO new_val_t FROM account WHERE account_id=1;
+	SET retval = 0;
+	IF new_val_f >= amt THEN
+		SET retval = 1;
+	ELSE
+		SET retval = -1;
+	END IF
+	
+	IF retval > 0 THEN
+		INSERT INTO test(odds_1,odds_2) VALUES (amt, amt);
+// first no do then do		set trans_id2 = last_insert_id();
+	END IF
+	COMMIT;
+END//
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE tranny_test5(IN amt FLOAT, OUT retval INT)
+BEGIN
+	DECLARE new_val_f FLOAT DEFAULT -1.0;
+	DECLARE new_val_t FLOAT DEFAULT -1.0;
+	START TRANSACTION;
+	SELECT balance INTO new_val_f FROM account WHERE account_id=5;
+	SELECT balance INTO new_val_t FROM account WHERE account_id=1;
+	SET retval = 0;
+	IF new_val_f >= amt THEN
+		SET retval = 1;
+	ELSE
+		SET retval = -1;
+	END IF
+	
+//	IF retval > 0 THEN
+// now take this out it seems to be the culprit - 		INSERT INTO test(odds_1,odds_2) VALUES (amt, amt);
+// first no do then do		set trans_id2 = last_insert_id();
+//	END IF
+	COMMIT;
+END//
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE tranny_test6(IN amt FLOAT, OUT retval INT)
+BEGIN
+	DECLARE new_val_f FLOAT DEFAULT -1.0;
+	DECLARE new_val_t FLOAT DEFAULT -1.0;
+	START TRANSACTION;
+	SELECT balance INTO new_val_f FROM account WHERE account_id=5;
+	SELECT balance INTO new_val_t FROM account WHERE account_id=1;
+	SET retval = 0;
+  INSERT INTO test(odds_1,odds_2) VALUES (amt, amt);
+	COMMIT;
+END//
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE tediti(IN to_acct INT UNSIGNED, OUT trans_id2 INT)
+BEGIN
+	DECLARE datime DATETIME;
+	DECLARE date1 DATETIME;
+	DECLARE retdays INT;
+	SELECT initial_time INTO date1 FROM transaction WHERE trans_id=to_acct;
+	SELECT NOW() INTO datime;
+	SELECT DATEDIFF(datime,date1) INTO retdays;
+	SET trans_id2 = retdays;
+END//
+DELIMITER ;
+	
+	
+	DECLARE btype TINYINT UNSIGNED;
+	DECLARE from_acct_id INT UNSIGNED;
+	DECLARE stat TINYINT UNSIGNED;
+	START TRANSACTION;
+	SELECT NOW() INTO datime;
+	SET btype = 1

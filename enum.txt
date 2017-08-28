@@ -1,0 +1,158 @@
+enum table
+
+enum_id	enum_value	enum_type	type_val type_descrition name	description
+
+enum_type:
+  pool_type			1
+  pool_status		2
+ 	account_type	3
+	account_status	4
+	transaction_type	5
+  bet_status 6
+	game_status == pool_status
+game_status - 
+  take out of game_desc_id?
+	customer_status == account_status
+	transaction_status 7
+	deposit_type 8
+	category			9
+	subcategory		10
+	general				11
+	game display  12
+	
+		
+enum_values:
+pool_status
+	SETUP					1
+	PRE_GAME			2
+	LIMITING			3
+	GAME_STARTED	4
+	GAME_OVER			5
+	RESULTS_IN		6
+	CLOSED				7	
+game_status == pool_status
+	
+pool_type
+	SPREAD				1
+	MONEYLINE			2
+	PWP						3
+	OVER_UNDER		4
+	TEAM_OVER_UNDER	5
+	MULTI_ENTRY			6
+	META_GAME				7
+	
+account_type:
+	CUSTOMER		1
+	POOL				2
+		
+account_status:
+  NEW 0			// no account associated with. probably not used, the id will be NULL;
+	READY 1		// associated account but no first deposit
+	GOOD_STANDING	2
+	INSUFFICIENT_FUNDS	3
+	BAD_STANDING			4
+	CLOSED						5
+
+note: pool_status and  customer_status USE account_status!!!!
+
+customer_status: sams was account.
+	
+pool_status:
+	NEW	1
+	GOOD_STANDING	2
+	INSUFFICIENT_FUNDS	3
+	BAD_STANDING			4
+	CLOSED						5	
+transcation_type:
+	DEPOSIT			1
+	WITHDRAW		2
+	BET_DEBIT		3
+	BET_CREDIT	4
+	P2P_TRANSFER	5
+	OTHER_TRANSFER 6
+	
+transaction_status:
+	PENDING	1
+	COMPLETE	2
+	INCOMPLETE	3
+	CANCELLED 4
+
+bet_status:
+	PENDING 	1
+	COMPLETE	2
+	CANCELLED	3
+	COMPLETE_WIN 4
+	
+category:
+	FOOTBALL		1
+	BASKETBALL	2
+	BASEBALL		3
+	HOCKEY			4
+	HORSE RACING	5
+	NASCAR				6
+	GOLF					7
+	SOCCER				8
+	
+	
+subcategory
+	NONE		0
+	NFL			1
+	MLB			2
+	NBA			3
+	NCAA		4
+	OLYMPICS	5
+
+deposit_type enums:
+	CASH 	1
+	CHECK 2
+	MONEY_ORDER 3
+	VISA_CREDIT 4
+	VISA_DEBIT	5
+	MASTERCARD_CREDIT 6
+	MASTERCARD_DEBIT 7
+	ECH_TRANSFER 8
+	WIRE	9
+	WESTERN_UNION 10
+	PAY_PAL	11
+	P2P_TRANSFER 12	
+
+// need to add (and type ..)
+general enums:
+OVER 1
+UNDER 2
+PUSH 3
+
+display status:
+INIT 1
+DISPLAY 2
+NO_DISPLAY 3
+
+cookies:
+Display Odds:
+	Bovada 1
+	Caesars 3
+	None	5
+
+what are the steps for a check:
+	1. wait for the check.
+	2. deposit check.
+	3. wait for bank to clear check.
+	4. put into customers account.
+	
+what are the steps for visa:
+	1. put in request.
+	2. run online merchant call to get money.
+	3. transfer money to account.
+	
+now shnooze.
+	1. 
+	
+bet table:
+	bet_id is associated with a transaction
+	bet_id trans_id pick_entry1 pick_entry2 .. pick_entry20
+	
+	
+	
+TODO: ignore custoemrs that do not have valid account_id's yo, it will probably happen naturally.
+	
+	

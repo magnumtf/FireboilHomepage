@@ -1,0 +1,76 @@
+15,21c15,24
+< //	$link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
+<     $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
+<     if ($mysqli->connect_errno) {
+<         echo "Error - Failed to connect to MySQL: " . $mysqli->connect_error; 
+<         exit();
+<     }
+<     
+---
+> 	$link = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+> 	if(!$link) {
+> 		die('Failed to connect to server: ' . mysql_error());
+> 	}
+> 	//Select database
+> 	$db = mysql_select_db(DB_DATABASE);
+> 	if(!$db) {
+> 		die("Unable to select database");
+> 	}
+> 	
+26c29,58
+< 		$retval = false;
+---
+> 		$retval = true;
+> 		$pos = strpos($text, "<");
+> 		if ($pos === false) 
+> 		{
+> 			$pos = strpos($text, ">");
+> 			if ($pos === false) 
+> 			{
+> 				$pos = strpos($text, "\"");
+> 				if ($pos === false) 
+> 				{
+> 					$pos = strpos($text, "'");
+> 					if ($pos === false) 
+> 					{
+> 						$pos = strpos($text, "\\");
+> 						if ($pos === false) 
+> 						{
+> 							$pos = strpos($text, "*");
+> 							if ($pos === false) 
+> 							{
+> 								$pos = strpos($text, "/");
+> 								if ($pos === false) 
+> 								{
+> 									$retval = false;
+> 								}
+> 							}
+> 						}
+> 					}
+> 				}
+> 			}
+> 		} 
+32c64,68
+< 		return $str;
+---
+> 		$str = @trim($str);
+> 		if(get_magic_quotes_gpc()) {
+> 			$str = stripslashes($str);
+> 		}
+> 		return mysql_real_escape_string($str);
+42,43d77
+<     //print "Yo, mtf. made it here you mofos <br />";
+<     //exit();
+71,72d104
+<     //print "Yo, mtf. made it here you mofos <br />";
+<     //exit();
+87,88d118
+<     //print "Yo, mtf. made it here you mofos <br />";
+<     //exit();
+92c122
+< 	$result=mysqli->query($qry);
+---
+> 	$result=mysql_query($qry);
+94,95d123
+<     print "Yo, mtf. hint, it's in mysql_query. made it here you mofos <br />";
+<     exit();

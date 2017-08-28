@@ -1,0 +1,24 @@
+1. upload pics to a directory (for now pics or some such thing)
+2. mkdir user #
+3. mkdir 1, 2, 3, 4, ... one is the title and will make a thumb.
+4. how to delete a pic?
+5. generate-able web pages yo.
+
+
+
+for images have a directory
+bg_id
+host name
+drive number
+filename
+priority
+thumbnail
+
+
+
+tings to do:
+    android - make the skybear car work better
+    android - make the tinder list views work
+    website - upload generate pic pages and store infos in db
+    web service for providing pic to android list app (2)
+    

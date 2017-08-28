@@ -1,0 +1,114 @@
+fmd,falc(10%), drl will probably rebuild
+
+choose a proven online business model
+
+create your usp (ultimate selling prop / sales positioning)
+
+apr 7: taxes!!!, pick (name and rot_id), odds, spread (odds and spread, just use existing names -> pass them all down and have classpool figure out what it needs.
+rot_id make an arr in the pool that is num bet based (0,1,2,3)
+rot_id_name_arr -> same thing -> okay lets do this.
+
+
+
+<input type='hidden' name='game_desc_id' id='game_desc_id' value=" . "$game_desc_id_1" . "/>
+
+
+
+<input type='hidden' name='game_num_arr[]' value='1'/>
+<input type='hidden' name='acct_id_sp' value='' />
+<input type='hidden' name='acct_id_pwp' value='' />
+<input type='hidden' name='acct_id_ml' value='' />
+<input type='hidden' name='acct_id_sp' value='' />
+
+
+current time, Subcategory  Category  Game 
+
+GameDate                               Current time
+
+FedEx Field, Atlanta Falcons at Washington Redskins, GameDate
+
+spread 		-3  entry name current odds (american/decimal)  <bold>115.00</bold> to win 100.00* 
+moneyline  -	current odds (american/decimal)  amount
+pwp	   -3	current odds (american/decimal)  amount
+over/under 52	current odds (american/decimal)  amount
+
+total bets:	total amount:
+
+
+
+Display Odds: Decimal -> change this will redisplay perhaps, look what you have already done.
+  
+Change Amount	Submit Wager	Cancel Wager
+                                blank sess parameters, go back to original recipe.
+                -> write to database and output trans_id, and link back to original recipe.
+can this submit also?
+if Change Amount is set go to bet_exec3a that uses the same posts as bet_execf.php.
+
+*Win amount is estimate based on current odds.
+
+
+php - nice display for bet_exec1a:
+
+could be a css table, yo.
+One table for each game, yo.
+now shnooze.
+
+
+today:
+a0	shit/shower
+a0	mornign gloreis
+taxes
+a1	fb
+downstairs
+a3	gym fast one, yo.
+bank
+a2	scotttrade
+a6	mall
+
+
+<?php
+    if(isset($_GET['firstButtonName'])
+        header("Location: first-target.php?var1={$_GET['var1']}&var2={$_GET['var2']}");
+    if(isset($_GET['secondButtonName'])
+        header("Location: second-target.php?var1={$_GET['var1']}&var2={$_GET['var2']}");
+?>
+
+echo "<div id='pool_view'>\n";
+$game_info = Field . Name . Date
+echo "<table id='hor-minimalist-a' summary=$game_info>\n";
+echo "<colgroup>\n";
+echo "<col />\n";
+echo "<col />\n";
+echo "<col />\n";
+echo "<col />\n";
+echo "<col class='oce-first' />\n";
+echo "</colgroup>\n";
+
+echo "<thead>\n";
+echo "<tr>\n";
+echo "<th colspan='5'><span>" . "$gamename" . "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Carryover: $" . "$carryover" . "</span></th>\n";
+echo "</tr>\n";  // probably dont need this yo.
+
+echo "<tr>\n";
+echo "<th scope='col'>" . "$game_info" . "</th>\n";
+echo "<th scope='col'></th>\n";
+echo "<th scope='col'></th>\n";
+echo "<th scope='col'></th>\n";
+echo "<th scope='col'></th>\n";
+echo "</tr>\n";
+echo "</thead>\n";
+
+
+echo "<tbody>\n";
+echo "<tr>\n";
+echo "<td>" . "$pool_type_pick1" . "</td>\n";
+echo "<td>" . "$spread_pick1" . "</td>\n";
+echo "<td>" . "$entry_name_pick1" . "</td>\n";
+echo "<td>" . "$current_odds_pick1" . "</td>\n";
+echo "<td>" . "$amount_pick1" . "</td>\n";   // <bold>$115.00</bold> to win $100.00*
+echo "</tr>\n";
+...
+echo "</tbody>\n";
+echo "</table>\n";
+echo "<br />\n"; or hr
+echo "</div>\n";
